@@ -23,6 +23,15 @@ function vueChannel(name) {
         }
     }
 
+    function $objectEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     function $genId(length = 9) {
         var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         var retn = "";
@@ -42,7 +51,11 @@ function vueChannel(name) {
         },
         receive(handeler) {
             window.vueChannels[name].receivers[$genId()] = handeler;
-            handeler(window.vueChannels[name].state);
+            
+            let state = window.vueChannels[name].state;
+            if (!$objectEmpty(state)) {
+                handeler(state);
+            }
         }
     }
 
