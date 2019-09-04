@@ -3,5 +3,6 @@
     "version": "1.0.0",
     "description": "A helpful package to sync data between components",
     "main": "index.js",
-    "license": "MIT"
+    "license": "MIT",
+    "repository": "rster2002/vue-channel"
 }
