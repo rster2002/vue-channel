@@ -149,7 +149,7 @@ vueChannel("userInfo")
 
 When the state is updated, this method will be called where you can use the state to update the state of your component. If the state is not empty when the receiver is created, it will fire once.
 
-#### disposable
+#### disposable(callback)
 
 ```javascript
 vueChannel("userInfo")
