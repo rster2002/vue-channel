@@ -137,10 +137,41 @@ vueChannel("userInfo")
 ```
 
 In contrast to `set`, `update` only overwrites new values.
+
+#### receive(callback)
+
+```javascript
+vueChannel("userInfo")
+	.receive(state => {
+    	// Do stuff
+	});
+```
+
+When the state is updated, this method will be called where you can use the state to update the state of your component. If the state is not empty when the receiver is created, it will fire once.
+
+#### disposable
+
+```javascript
+vueChannel("userInfo")
+	.disposable(state => {
+    	// Do stuff
+	});
+```
+
+A disposable is usefull when handeling with an asyncronous state, like when getting userdata from a database. The disposable will only fire when the state changed and will delete itself, so it will only be fired once. You can keep the disposable alive by returning `true` like this:
+
+```javascript
+vueChannel("userInfo")
+	.disposable(state => {
+    	// Do stuff
+    	return true;
+	});
+```
+
 #### state
 
 ```javascript
-vueChannel("userInfo").state
+vueChannel("userInfo").state;
 ```
 
-Simple gets the current state of the channel.
+Simple returns the current state of the channel.

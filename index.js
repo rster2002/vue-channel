@@ -8,6 +8,7 @@ function vueChannel(name) {
         window.vueChannels[name] = {
             state: {},
             receivers: {},
+            disposable: {},
             $setState(state) {
                 this.state = state;
                 this.$broadcastState();
@@ -19,6 +20,17 @@ function vueChannel(name) {
             $broadcastState() {
                 var handelers = Object.values(this.receivers);
                 handelers.forEach(handeler => handeler(this.state));
+
+                var disposables = Object.entries(this.disposable);
+                disposables.forEach(row => {
+                    var handeler = row[1];
+
+                    var keepAlive = handeler(this.state);
+
+                    if (keepAlive === undefined || keepAlive === false) {
+                        delete this.disposable[row[0]];
+                    }
+                });
             }
         }
     }
@@ -50,8 +62,16 @@ function vueChannel(name) {
             window.vueChannels[name].$updateState(state);
         },
         receive(handeler) {
-            window.vueChannels[name].receivers[$genId()] = handeler;
+            window.vueChannels[name].disposable[$genId()] = handeler;
             
+            let state = window.vueChannels[name].state;
+            if (!$objectEmpty(state)) {
+                handeler(state);
+            }
+        },
+        disposable(handeler) {
+            window.vueChannels[name].disposable[$genId()] = handeler;
+
             let state = window.vueChannels[name].state;
             if (!$objectEmpty(state)) {
                 handeler(state);
