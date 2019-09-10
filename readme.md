@@ -158,7 +158,7 @@ vueChannel("userInfo")
 	});
 ```
 
-A disposable is usefull when handeling with an asyncronous state, like when getting userdata from a database. The disposable will only fire when the state changed and will delete itself, so it will only be fired once. You can keep the disposable alive by returning `true` like this:
+A disposable is usefull when handeling with an asyncronous state, like when getting userdata from a database. The disposable will fire when the state changed and will delete itself, so it will only be fired once. You can keep the disposable alive by returning `true` like this:
 
 ```javascript
 vueChannel("userInfo")
