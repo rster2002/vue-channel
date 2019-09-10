@@ -1,6 +1,6 @@
 {
     "name": "vue-channel",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A helpful package to sync data between components",
     "main": "index.js",
     "license": "MIT",
