@@ -62,7 +62,7 @@ function vueChannel(name) {
             window.vueChannels[name].$updateState(state);
         },
         receive(handeler) {
-            window.vueChannels[name].disposable[$genId()] = handeler;
+            window.vueChannels[name].receivers[$genId()] = handeler;
             
             let state = window.vueChannels[name].state;
             if (!$objectEmpty(state)) {
